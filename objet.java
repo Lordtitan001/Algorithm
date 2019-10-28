@@ -5,20 +5,46 @@ public class Objet {
     //Objet(){};
 
     Objet(TypeObjet type){
-        this.type = type;
+        this.type_ = type;
         switch (type){
             case A:
-                this.masse=1;
+                this.masse_ = 1;
                 break;
             case B:
-                masse=3;
+                this.masse_ = 3;
                 break;
             case C:
-                masse=6;
+                this.masse_ = 6;
                 break;
         }
     };
 
-    private TypeObjet type;
+    private TypeObjet type_ ;
     private int masse_;
+
+    /**
+     * @return the masse_
+     */
+    public int getMasse_() {
+        return masse_;
+    }
+
+    /**
+     * @return the type_
+     */
+    public TypeObjet getType_() {
+        return type_;
+    }
+    /**
+     * @param masse_ the masse_ to set
+     */
+    public void setMasse_(int masse_) {
+        this.masse_ = masse_;
+    }
+    /**
+     * @param type_ the type_ to set
+     */
+    public void setType_(TypeObjet type_) {
+        this.type_ = type_;
+    }
 }

@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Robot",
+            "request": "launch",
+            "mainClass": "Robot",
+            "projectName": "LOG2810_ad0e91dc"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Graphe",
+            "request": "launch",
+            "mainClass": "Graphe",
+            "projectName": "LOG2810_ad0e91dc"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Objet",
+            "request": "launch",
+            "mainClass": "Objet",
+            "projectName": "LOG2810_af09c22d"
+        }
+    ]
+}
