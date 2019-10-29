@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,8 +30,12 @@ public class Chemin {
 
     public void plusCourtChemin(){
         Graphe graphe= new Graphe();
-        while(!testedMap.containsKey(0) || commandeOK){
-            //graphe.getMapNoeud()
-        }
+        // while(!testedMap.containsKey(0) || commandeOK){
+        //     //graphe.getMapNoeud()
+        // }
+    }
+
+    public static void main(String args[]) throws FileNotFoundException {
+        Graphe graphe = new Graphe();
     }
 }
