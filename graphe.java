@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -11,12 +10,15 @@ public class Graphe {
 
     private static Map<Integer, Noeud> mapNoeud =  new TreeMap<Integer, Noeud>();
     private static Map<Integer, Arc> mapArc =  new TreeMap<Integer, Arc>();
+    public Graphe() throws FileNotFoundException {
+        creerGraphe();
+    }
 
     /**
      * @param mapArc the mapArc to set
      */
-    public void setMapArc(Map<Integer, Arc> mapArc) {
-        this.mapArc = mapArc;
+    public void setMapArc(Map<Integer, Arc> maparc) {
+        mapArc = maparc;
     }
     /**
      * @return the mapArc
@@ -39,7 +41,7 @@ public class Graphe {
         Scanner in = new Scanner(textFile);
         int ligne = 0;
 
-        while( in.hasNext() && ligne < 22){
+        while( in.hasNext() && ligne < 21){
             in.next();
             ligne++;
         }
@@ -49,7 +51,6 @@ public class Graphe {
            String value = in.next();
             String temp = "";
             List<Integer> tab = new LinkedList<Integer>();
-            int pos = 0;
            for(int i = 0 ; i < value.length(); i++){
                 if(value.charAt(i) != ',')
                     temp += value.charAt(i);
@@ -69,12 +70,14 @@ public class Graphe {
                 }
            }
 
-            this.mapArc.put(counter, new Arc(getMapNoeud().get(tab.get(0)), getMapNoeud().get(tab.get(1)), tab.get(2)));
-            counter++;
+            mapArc.put(counter++, new Arc(getMapNoeud().get(tab.get(0)), getMapNoeud().get(tab.get(1)), tab.get(2)));
            
         }
 
+        System.out.println("List ARCS");
         getMapArc().values().forEach((arc) ->{
+           
+           // System.out.println("(" + arc.getNoeud1_().getNumero() + "," + arc.getNoeud2_().getNumero() + "," + arc.getDistance_() + " )");
             arc.getNoeud1_().addArc(arc);
             arc.getNoeud2_().addArc(arc);
         });
@@ -113,7 +116,7 @@ public class Graphe {
                 val3 = value.charAt(3) - 48; 
                 val4 = value.charAt(4) - 48; 
             }
-            this.mapNoeud.put(val1, new Noeud(val1, val2, val3, val4));
+            mapNoeud.put(val1, new Noeud(val1, val2, val3, val4));
             ligne++;
         }
 
@@ -125,13 +128,12 @@ public class Graphe {
      * @param map the map to set
      */
     public void setMapNoeud(Map<Integer, Noeud> map) {
-        this.mapNoeud = map;
+        mapNoeud = map;
     }
 
     public void creerGraphe() throws FileNotFoundException {
-        Graphe graphe = new Graphe();
-        graphe.creerNoeuds();
-        graphe.creerArcs();
+        creerNoeuds();
+        creerArcs();
     }
 
     public void afficherGraphe(){
@@ -139,8 +141,8 @@ public class Graphe {
             System.out.println("");
             System.out.print("(" + noeud.getNumero() + "," + noeud.getObjetA() + "," + noeud.getObjetB() +
              "," + noeud.getObjetC() + ", ");
-            noeud.getListeVoisins().forEach((voisin) ->{
-                System.out.print(" (" + voisin.getR().getNumero() + "," + voisin.getL() + ")");
+            noeud.getAdjacentNodes().entrySet().forEach((voisin) ->{
+                System.out.print(" (" + voisin.getKey().getNumero() + "," + voisin.getValue()+ ")");
             });
             System.out.print(" )");
         });
@@ -149,7 +151,7 @@ public class Graphe {
 
     public static void main(String args[]) throws FileNotFoundException {
         Graphe graphe = new Graphe();
-        graphe.creerGraphe();
-        graphe.afficherGraphe();
+        //graphe.afficherGraphe();
+        
     }
 }
