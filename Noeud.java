@@ -1,6 +1,8 @@
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Set;
 
 
 public class Noeud{
@@ -11,7 +13,7 @@ public class Noeud{
     private int objetC;
     private LinkedList<Arc> listeArc = new LinkedList<Arc>();
     private LinkedList<Noeud> shortestPath = new LinkedList<>();
-    private LinkedList<State> states = new LinkedList<>();
+    private Set<State> states = new HashSet<State>();
     private Map<Noeud, Integer> adjacentNodes = new HashMap<>();
     private Integer distance = Integer.MAX_VALUE;
 
@@ -25,23 +27,31 @@ public class Noeud{
 
     }
 
+    public Noeud clone() throws CloneNotSupportedException {
+
+        return (Noeud) super.clone();
+    }
+
     /**
      * @return the states
      */
-    public LinkedList<State> getStates() {
+    public Set<State> getStates() {
         return states;
     }
 
     /**
      * @param states the states to set
      */
-    public void setStates(LinkedList<State> states) {
+    public void setStates(Set<State> states) {
         this.states = states;
     }
 
     public Noeud() {
     }
 
+    public void addState( State state){
+        states.add(state);
+    }
     public void addAdjacentNode(Noeud destination, int distance) {
         adjacentNodes.put(destination, distance);
     }
