@@ -1,9 +1,6 @@
 enum TypeObjet{A,B,C};
 
 public class Objet {
-
-    //Objet(){};
-
     Objet(TypeObjet type){
         this.type_ = type;
         switch (type){
@@ -22,28 +19,18 @@ public class Objet {
     private TypeObjet type_ ;
     private int masse_;
 
-    /**
-     * @return the masse_
-     */
     public int getMasse_() {
         return masse_;
     }
 
-    /**
-     * @return the type_
-     */
     public TypeObjet getType_() {
         return type_;
     }
-    /**
-     * @param masse_ the masse_ to set
-     */
+
     public void setMasse_(int masse_) {
         this.masse_ = masse_;
     }
-    /**
-     * @param type_ the type_ to set
-     */
+
     public void setType_(TypeObjet type_) {
         this.type_ = type_;
     }

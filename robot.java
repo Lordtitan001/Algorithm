@@ -1,4 +1,3 @@
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 enum Type {
@@ -6,6 +5,25 @@ enum Type {
 };
 
 public class Robot {
+
+    public Robot(){
+        this.type_ = Type.X;
+        this.masse_ = 0;
+        this.capacity_ = 25;
+        this.constante_ = 2.5;
+    }
+
+    
+   public Robot(Robot rob){
+    this.capacity_ = rob.capacity_;
+    this.masse_ = rob.masse_;
+    this.constante_ = rob.constante_;
+    timeSpend = rob.timeSpend;
+    type_ = rob.type_;
+    objetRecuperes = rob.objetRecuperes.clone();
+ }
+  
+
 
     Robot(Type type) {
 
@@ -29,32 +47,40 @@ public class Robot {
         this.type_ = type;
     }
 
-    public Robot(){
-        this.type_ = Type.X;
-        this.masse_ = 0;
-        this.capacity_ = 1;
-        this.constante_ = 1;
+    public Type getType_() {
+        return type_;
+    }
+
+    public double getCapacity_() {
+        return capacity_;
+    }
+
+    public double getMasse_() {
+        return masse_;
     }
 
 
-    /**
-     * @return the timeSpend
-     */
-    public double getTimeSpend() {
-        return timeSpend;
+    public double getMasseCommande(){
+        return (commande[0] + commande[1]*3 + commande[2]* 6);
     }
-    /**
-     * @param timeSpend the timeSpend to set
-     */
-    public void setTimeSpend(double timeSpend) {
-        this.timeSpend = timeSpend;
+
+    public static int[] getCommande() {
+        return commande;
     }
+ 
+    public int[] getObjetRecuperes() {
+        return objetRecuperes;
+    }
+ 
+    public void setObjetRecuperes(int[] objetRecuperes) {
+        this.objetRecuperes = objetRecuperes;
+    }
+
 
     public double addTime(int distance){
         timeSpend += distance*constante_;
         return timeSpend;
     }
-
 
     public void setMasse(double masse) {
         this.masse_ = masse;
@@ -93,23 +119,16 @@ public class Robot {
         setMasse(0);
     }
 
-    /**
-     * @return the constante_
-     */
     public double getConstante_() {
         return constante_;
     }
 
-    /**
-     * @param constante_ the constante_ to set
-     */
     public void setConstante_(double constante_) {
         this.constante_ = constante_;
     }
 
     public static void prendreCommande() {
 
-       
         System.out.println("Veuillez saisir 3 entiers pour une commande des objets A, B et C séparés d'un espace et dans cet ordre:");
         Scanner sc = new Scanner(System.in);
         for (int i = 0; i < 3; i++) {
@@ -196,66 +215,13 @@ public class Robot {
             }
             if ( commande[i] != 0  && bonNbObjets != 0 && objetRecuperes[i] < commande[i]){
                 if(addMasse(masseAjoutee)){
-                objetRecuperes[i] += bonNbObjets ;
-                if (objetRecuperes[i] > commande[i]){ // verifier l'utilité de ce if, condition deja vérifié dans le switch je pense
-                    objetRecuperes[i] = commande[i];
+                    objetRecuperes[i] += bonNbObjets ;
                 }
-            }
                 
             }
         }
     }
 }
-
-   /**
-    * @return the commande
-    */
-   public static int[] getCommande() {
-       return commande;
-   }
-
-   /**
-    * @return the objetRecuperes
-    */
-   public int[] getObjetRecuperes() {
-       return objetRecuperes;
-   }
-
-   /**
-    * @param objetRecuperes the objetRecuperes to set
-    */
-   public void setObjetRecuperes(int[] objetRecuperes) {
-       this.objetRecuperes = objetRecuperes;
-   }
-
-
-   public static void main(String args[]) throws FileNotFoundException {
-
-       prendreCommande();
-
-       afficherCommande();
-
-       Noeud node1 = new Noeud(1,2,0,4);
-       Noeud node2 = new Noeud(1,2,0,4);
-
-       Robot rob = new Robot(Type.X);
-       rob.recupererObjets(node1);
-       rob.recupererObjets(node2);
-
-       rob.afficherObjetsRecuperer();
-   }
-
-   public Robot(Robot rob){
-      this.capacity_ = rob.capacity_;
-      this.masse_ = rob.masse_;
-      this.constante_ = rob.constante_;
-      timeSpend = rob.timeSpend;
-      type_ = rob.type_;
-      objetRecuperes = rob.objetRecuperes.clone();
-   }
-    
-
-
 
     private  int objetRecuperes[] = new int[3];  // attribut tableau de int qui represente les objets recupérées afin de satisfaire la commande
     private static int commande[] = new int[3]; // attribut tableau de int ajouté pour gerer la commande d'un robot

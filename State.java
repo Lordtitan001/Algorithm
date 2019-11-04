@@ -1,77 +1,59 @@
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
 
 public class State {
     private double time = 0;
     private Robot robot;
     private LinkedList<Noeud> shortestPath = new LinkedList<>();
+    private Set<Noeud> inspectedNodes = new HashSet<>();
 
     State(Robot robot){
         this.robot = robot;
     }
 
-    State(LinkedList<Noeud> shortestPath, Robot robot){
+    State(LinkedList<Noeud> shortestPath, Robot robot, Set<Noeud> inspectedNodes){
         this.robot = new Robot(robot);
-        this.shortestPath = (LinkedList<Noeud>) shortestPath.clone();
+        this.shortestPath = new LinkedList<Noeud> (shortestPath);
+        this.inspectedNodes =  new HashSet<Noeud>(inspectedNodes);
+    }
+
+    public Set<Noeud> getInspectedNodes() {
+        return inspectedNodes;
     }
 
     public void recupererObjets(Noeud currentNode){
         robot.recupererObjets(currentNode);
     }
 
-    /**
-     * @return the shortestPath
-     */
     public LinkedList<Noeud> getShortestPath() {
         return shortestPath;
     }
 
-    /**
-     * @param shortestPath the shortestPath to set
-     */
     public void setShortestPath(LinkedList<Noeud> shortestPath) {
         this.shortestPath = shortestPath;
     }
 
-
-    /**
-     * @param robot the robot to set
-     */
     public void setRobot(Robot robot) {
         this.robot = robot;
     }
 
-    /**
-     * @return the robot
-     */
     public Robot getRobot() {
         return robot;
     }
 
-    
-    /**
-     * @return the commande
-     */
     public int[] getCommande() {
         return robot.getObjetRecuperes();
     }
 
-    /**
-     * @param commande the commande to set
-     */
     public void setCommande(int[] commande) {
         robot.setObjetRecuperes(commande);
     }
 
-    /**
-     * @return the time
-     */
     public double getTime() {
         return time;
     }
 
-    /**
-     * @param time the time to set
-     */
     public void setTime(double time) {
         this.time = time;
     }
@@ -85,6 +67,6 @@ public class State {
     }
 
     public State clone(){
-        return new State(shortestPath, robot);
+        return new State(shortestPath, robot, inspectedNodes);
     }
 }
