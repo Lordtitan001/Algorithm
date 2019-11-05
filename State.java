@@ -3,40 +3,27 @@ import java.util.LinkedList;
 import java.util.Set;
 
 public class State {
+    // Le temps mis pour atteindre cet etat
     private double time = 0;
     private Robot robot;
+    // Liste des neouds traversé
     private LinkedList<Noeud> shortestPath = new LinkedList<>();
+    // Liste des noeuds collectés
     private Set<Noeud> inspectedNodes = new HashSet<>();
-    private static Integer count = 0;
-    private Integer number = 0;
 
     State(Robot robot){
         this.robot = robot;
-        this.number = count;
-        count ++;
     }
 
-    State(LinkedList<Noeud> shortestPath, Robot robot, Set<Noeud> inspectedNodes, double time, Integer number){
+    State(LinkedList<Noeud> shortestPath, Robot robot, Set<Noeud> inspectedNodes, double time){
         this.robot = new Robot(robot);
         this.shortestPath = new LinkedList<Noeud> (shortestPath);
         this.inspectedNodes =  new HashSet<Noeud>(inspectedNodes);
         this.time = time;
-        this.number = number;
+
     }
 
-    public Integer getNumber() {
-        return number;
-    }
-
-    public void setNumber() {
-        State.count++;
-        this.number = count;
-    }
-
-    public static Integer getCount() {
-        return count;
-    }
-
+    // Liste de getters et de setters
     public Set<Noeud> getInspectedNodes() {
         return inspectedNodes;
     }
@@ -77,6 +64,7 @@ public class State {
         this.time = time;
     }
 
+    // Ajouter du temps a un etat
     public boolean addTime(double time) {
         this.time += time;
         if(time > 0)
@@ -85,11 +73,12 @@ public class State {
             return false;
     }
 
+    // Collecter un noeud
     public int addCommande(Noeud noeud){
         return robot.recupererObjets(noeud);
     }
 
     public State clone(){
-        return new State(shortestPath, robot, inspectedNodes, time, number);
+        return new State(shortestPath, robot, inspectedNodes, time);
     }
 }

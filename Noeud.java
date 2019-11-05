@@ -6,15 +6,19 @@ import java.util.Set;
 
 
 public class Noeud{
-
+    // Numero du noeud
     private int numero;
+    // Nombre d'objet de chaque type
     private int objetA;
     private int objetB;
     private int objetC;
+    // Liste des arcs incidents du noeud
     private LinkedList<Arc> listeArc = new LinkedList<Arc>();
     private LinkedList<Noeud> shortestPath = new LinkedList<>();
+    // Liste des etats possible pour chaque noeud
     private Set<State> states = new HashSet<State>();
     private Map<Noeud, Integer> adjacentNodes = new HashMap<>();
+    // Distance a partir d'un l'origine en suivant un chemin specifique
     private Integer distance = Integer.MAX_VALUE;
 
 
@@ -31,6 +35,8 @@ public class Noeud{
 
         return (Noeud) super.clone();
     }
+
+    /********************************** Liste de getters et de setters ***********************************/
 
     public Set<State> getStates() {
         return states;
