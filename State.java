@@ -7,15 +7,34 @@ public class State {
     private Robot robot;
     private LinkedList<Noeud> shortestPath = new LinkedList<>();
     private Set<Noeud> inspectedNodes = new HashSet<>();
+    private static Integer count = 0;
+    private Integer number = 0;
 
     State(Robot robot){
         this.robot = robot;
+        this.number = count;
+        count ++;
     }
 
-    State(LinkedList<Noeud> shortestPath, Robot robot, Set<Noeud> inspectedNodes){
+    State(LinkedList<Noeud> shortestPath, Robot robot, Set<Noeud> inspectedNodes, double time, Integer number){
         this.robot = new Robot(robot);
         this.shortestPath = new LinkedList<Noeud> (shortestPath);
         this.inspectedNodes =  new HashSet<Noeud>(inspectedNodes);
+        this.time = time;
+        this.number = number;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber() {
+        State.count++;
+        this.number = count;
+    }
+
+    public static Integer getCount() {
+        return count;
     }
 
     public Set<Noeud> getInspectedNodes() {
@@ -58,15 +77,19 @@ public class State {
         this.time = time;
     }
 
-    public void addTime(double time) {
+    public boolean addTime(double time) {
         this.time += time;
+        if(time > 0)
+            return true;
+        else    
+            return false;
     }
 
-    public void addCommande(Noeud noeud){
-        robot.recupererObjets(noeud);
+    public int addCommande(Noeud noeud){
+        return robot.recupererObjets(noeud);
     }
 
     public State clone(){
-        return new State(shortestPath, robot, inspectedNodes);
+        return new State(shortestPath, robot, inspectedNodes, time, number);
     }
 }

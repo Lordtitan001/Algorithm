@@ -79,7 +79,7 @@ public class Noeud{
     }
 
     public void setShortestPath(LinkedList<Noeud> shortestPath) {
-        this.shortestPath = shortestPath;
+        this.shortestPath = (LinkedList<Noeud>) shortestPath.clone();
     }
 
     public LinkedList<Arc> getListeArc() {

@@ -97,6 +97,8 @@ public class Graphe {
         });
 
         in.close();
+        
+
     }
 
     public  void creerNoeuds() throws FileNotFoundException {
@@ -132,6 +134,7 @@ public class Graphe {
             ligne++;
         }
 
-        in.close();  
+        in.close();
+  
     }
 }

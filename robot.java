@@ -134,7 +134,7 @@ public class Robot {
         for (int i = 0; i < 3; i++) {
             Robot.commande[i] = sc.nextInt();
         }
-        sc.close();
+        //sc.close();
     }
 
     public static void afficherCommande() {
@@ -182,9 +182,9 @@ public class Robot {
             return false;
    }
 
-   public  void recupererObjets(Noeud currentNode){
+   public  int recupererObjets(Noeud currentNode){
 
-
+    int nombreAjouter = 0;
     if (!commandeEffectuee() && (masse_ <= capacity_)){
 
         for( int i = 0; i < 3; i++) {
@@ -195,23 +195,28 @@ public class Robot {
 
             switch (i){
                 case 0:
-                    if (nbObjetsnecessaires >= currentNode.getObjetA())
+                    if (nbObjetsnecessaires >= currentNode.getObjetA()){
                         bonNbObjets = currentNode.getObjetA();
+                    }
                     else{ bonNbObjets = nbObjetsnecessaires; }
-                    masseAjoutee = bonNbObjets;
+                        masseAjoutee = bonNbObjets;
+                        nombreAjouter += bonNbObjets;
                     break;
                 case 1:
                     if (nbObjetsnecessaires >= currentNode.getObjetB())
                         bonNbObjets = currentNode.getObjetB();
                     else{ bonNbObjets = nbObjetsnecessaires; }
                     masseAjoutee = bonNbObjets * 3;
+                    nombreAjouter += bonNbObjets;
                     break;
                 case 2:
                     if (nbObjetsnecessaires >= currentNode.getObjetC())
                         bonNbObjets = currentNode.getObjetC();
                     else{ bonNbObjets = nbObjetsnecessaires; }
                     masseAjoutee = bonNbObjets * 6;
+                    nombreAjouter += bonNbObjets;
                     break;
+               
             }
             if ( commande[i] != 0  && bonNbObjets != 0 && objetRecuperes[i] < commande[i]){
                 if(addMasse(masseAjoutee)){
@@ -221,6 +226,7 @@ public class Robot {
             }
         }
     }
+    return nombreAjouter;
 }
 
     private  int objetRecuperes[] = new int[3];  // attribut tableau de int qui represente les objets recupérées afin de satisfaire la commande
