@@ -55,6 +55,7 @@ public class Path {
             });
 
         }
+        System.out.println("");
     }
 
     private static void CalculateMinimumTime(Noeud evaluationNode, Integer edgeWeigh, Noeud sourceNode, Robot robot,
@@ -67,6 +68,14 @@ public class Path {
         // Pour chaque etat du noeud source
         while (it.hasNext()) {
             State state = it.next().clone();
+
+            if (state.getRobot().commandeEffectuee()) {
+                if (!settledNodes.contains(sourceNode)) {
+                    // Ajout du noeud parmis les noeuds deja testés si la commande est effectuer
+                    settledNodes.add(sourceNode);
+                    break;
+                }
+            }
 
             // Ajout du noeud vosin a l'etat cloner
             state.getShortestPath().add(evaluationNode);
@@ -82,14 +91,6 @@ public class Path {
 
             // Ajout de l'etat dans la liste des etat du noeud voisin
             evaluationNode.addState(state);
-
-            if (state.getRobot().commandeEffectuee()) {
-                if (!settledNodes.contains(sourceNode)) {
-                    // Ajout du noeud parmis les noeuds deja testés si la commande est effectuer
-                    settledNodes.add(sourceNode);
-                    break;
-                }
-            }
         }
 
     }
@@ -131,6 +132,7 @@ public class Path {
             else    
                 System.out.print( node.getNumero());
         });
+
     }
 
     // Fonction pour afficher le menu

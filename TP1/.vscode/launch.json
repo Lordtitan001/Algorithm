@@ -5,6 +5,13 @@
             "name": "CodeLens (Launch) - Path",
             "request": "launch",
             "mainClass": "Path",
+            "projectName": "TP1_7d90e682"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Path",
+            "request": "launch",
+            "mainClass": "Path",
             "projectName": "LOG2810_ad0e91dc"
         },
         {
