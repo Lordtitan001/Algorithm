@@ -1,76 +1,47 @@
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Menu  extends JPanel{
-    private JPanel initComp = new JPanel();
+
+    private static final long serialVersionUID = 1L;
     private Box verticalBox = new Box(BoxLayout.PAGE_AXIS);
-
-    private JTextField jtf = new JTextField("Entrer le Nom ici");
-    // private JLabel label = new JLabel("Nom du fichier");
-    private JButton initialiser = new JButton("OK");
-
-    private JButton sugession = new JButton("Rechercher objet");
-    private JButton ajouter = new JButton("Ajouter au panier");
-    private JButton vider = new JButton("Vider le panier");
-    private JButton quitter = new JButton("Quitter");
-    
+    private JTextField jtf = new JTextField("               ");
+    private Button initialiser = new Button("Ouvrir le fichier");
+    private Button sugession = new Button("Rechercher objet");
+    private Button vider = new Button("Vider le panier");
+    private Button quitter = new Button("Quitter");
 
     public Menu(){
-        // initComp.add(label);
-        initComp.add(jtf);
-        initComp.add(initialiser);
-
-        verticalBox.add(initComp);
+        verticalBox.add(jtf);
+        verticalBox.add(Box.createRigidArea(new Dimension(0, 20)));
+        verticalBox.add(initialiser);
+        verticalBox.add(Box.createRigidArea(new Dimension(0, 20)));
         verticalBox.add(sugession);
-        verticalBox.add(ajouter);
+        verticalBox.add(Box.createRigidArea(new Dimension(0, 20)));
         verticalBox.add(vider);
+        verticalBox.add(Box.createRigidArea(new Dimension(0, 20)));
         verticalBox.add(quitter);
-        
-        this.add(verticalBox);
+        this.add(verticalBox, BorderLayout.WEST);
     }
 
-    /**
-     * @return the sugession
-     */
-    public JButton getSugession() {
+    public Button getSugession() {
         return sugession;
     }
-
-    /**
-     * @return the ajouter
-     */
-    public JButton getAjouter() {
-        return ajouter;
-    }
-
-    /**
-     * @return the vider
-     */
-    public JButton getVider() {
+    
+    public Button getVider() {
         return vider;
     }
 
-    /**
-     * @return the quitter
-     */
-    public JButton getQuitter() {
+    public Button getQuitter() {
         return quitter;
     }
 
-    /**
-     * @return the initialiser
-     */
-    public JButton getInitialiser() {
+    public Button getInitialiser() {
         return initialiser;
     }
-
-    
 }

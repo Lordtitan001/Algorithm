@@ -1,7 +1,4 @@
 import java.util.LinkedList;
-import java.util.Scanner;
-
-import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -97,9 +94,9 @@ public class Automate {
 
             }
 
-            private void printEventInfo(String str, KeyEvent e) {
-                System.out.print(e.getKeyChar());
-            }
+            // private void printEventInfo(String str, KeyEvent e) {
+            //     System.out.print(e.getKeyChar());
+            // }
 
         };
 

@@ -1,6 +1,4 @@
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -10,7 +8,9 @@ import java.awt.event.MouseListener;
  
 
 public class Button extends JButton implements MouseListener {
-    private String name = "new button";
+
+  private static final long serialVersionUID = 1L;
+  private String name = "new button";
 
    Button(String name){
        super(name);
@@ -18,7 +18,7 @@ public class Button extends JButton implements MouseListener {
    }
    public void paintComponent(Graphics g){
         Graphics2D g2 = (Graphics2D)g;
-        GradientPaint gradientPaint = new GradientPaint(0, 0, Color.RED, 20, 20, Color.BLACK);
+        GradientPaint gradientPaint = new GradientPaint(0, 0, Color.RED, 50, 50, Color.BLACK);
         g2.setPaint(gradientPaint);
         g2.fillRect(0, 0, this.getWidth(), this.getHeight());
         g2.setColor(Color.white);
