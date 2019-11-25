@@ -37,37 +37,19 @@ public class Entrepot  { //Classe principale qui gere tout le systeme
 
     public static void creerArbre(){
 
-
-
-    for(var entrySet: inventaire.entrySet()){
-        Node currentNode = root;
-        for(char val : entrySet.getValue().getName().toCharArray()){
-            if(currentNode.nextChild(val) == null){
-                currentNode.getAdjaceNodes().add(new Node(currentNode, val));
-                currentNode.getAutoComplete().add(entrySet.getValue().getName());
-            }
-            currentNode = currentNode.nextChild(val);
-        }
-
-        /*boolean test = false;
-        for(var node: root.getAdjaceNodes()) {
-            if (node.getValue() == entrySet.getValue().getName().charAt(0)) {
-                test = true;
+        for(var entrySet: inventaire.entrySet()){
+            Node currentNode = root;
+            for(char val : entrySet.getValue().getName().toCharArray()){
+                if(currentNode.nextChild(val) == null){
+                    currentNode.getAdjaceNodes().add(new Node(currentNode, val));
+                    currentNode.getAutoComplete().add(entrySet.getValue().getName());
+                }
+                currentNode = currentNode.nextChild(val);
             }
         }
-        if (!test) {
-            root.getAdjaceNodes().add(new Node(root, entrySet.getValue().getName().charAt(0)));
-        }*/
     }
 
-        /*root.getAdjaceNodes().forEach((node) ->{
-            System.out.println(node.getValue());
-        });
-*/
-        Automate.afficherArbre(root);
-    }
-
-    public static Node getRoot() {
+    public static Node getRoot(){
         return root;
     }
 
