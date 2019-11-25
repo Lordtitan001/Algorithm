@@ -4,9 +4,6 @@ import java.nio.file.Paths;
 import java.security.Key;
 import java.util.*;
 
-//import Objet.Type;
-//import sun.jvm.hotspot.opto.Node;
-
 
 public class Entrepot  { //Classe principale qui gere tout le systeme
 
@@ -61,4 +58,4 @@ public class Entrepot  { //Classe principale qui gere tout le systeme
 
 
 }  
- 
+
