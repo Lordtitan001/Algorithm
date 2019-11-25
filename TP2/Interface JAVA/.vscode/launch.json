@@ -1,0 +1,32 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Fenetre",
+            "request": "launch",
+            "mainClass": "Fenetre",
+            "projectName": "Interface JAVA_3bab2225"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Interface",
+            "request": "launch",
+            "mainClass": "Interface",
+            "projectName": "Interface JAVA_3bab2225"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Fenetre",
+            "request": "launch",
+            "mainClass": "Fenetre",
+            "projectName": "TP2_7d90e683"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Interface",
+            "request": "launch",
+            "mainClass": "Interface",
+            "projectName": "TP2_7d90e683"
+        }
+    ]
+}

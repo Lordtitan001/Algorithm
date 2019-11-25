@@ -1,11 +1,7 @@
 
-public class Entrepot { //Classe principale qui gere tout le systeme
+public class Entrepot {
 
-    
-    public void readFile()
+    public static void main(String args[]) {
 
-
-
-
-
-} 
+    }
+}

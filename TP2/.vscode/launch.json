@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Interface",
+            "request": "launch",
+            "mainClass": "Interface",
+            "projectName": "TP2_7d90e683"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Entrepot",
+            "request": "launch",
+            "mainClass": "Entrepot",
+            "projectName": "TP2_7d90e683"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Automate",
+            "request": "launch",
+            "mainClass": "Automate",
+            "projectName": "TP2_7d90e683"
+        }
+    ]
+}
