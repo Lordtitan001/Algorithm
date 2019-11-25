@@ -1,13 +1,20 @@
+import java.lang.Enum;
+
+ enum Type {A, B, C};
 public class Objet{
-    enum Type {A, B, C};
+
     private String name ;
     private String code ;
     private Type type;
 
-    public Objet(String name, String code, Type type){
+    public Objet(String name, String code, String type){
         this.code = code;
         this.name = name;
-        this.type = type;
+        switch(type) {
+            case "A": this.type = Type.A; break;
+            case "B": this.type = Type.B; break;
+            case "C": this.type = Type.C; break;
+        }
     }
 
     /**

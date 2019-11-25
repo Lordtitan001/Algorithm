@@ -42,4 +42,7 @@ public class Node{
     public Node clone(){
         return new Node(this.parent, this.adjaceNodes, this.autoComplete);
     }
+
+
+
 }
