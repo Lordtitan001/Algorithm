@@ -8,10 +8,10 @@ import javax.swing.JTextField;
 
 public class Automate {
 
-    public static void prediction() {
+    public static void prediction(Node root) {
 
         /////////////////////////////////////////////////////////////////////////////
-        Node initNode = new Node(null);
+        Node initNode = new Node(null, ' ');
         LinkedList<String> word1 = new LinkedList<>();
         LinkedList<String> word2 = new LinkedList<>();
         word1.push("avi");
@@ -47,7 +47,7 @@ public class Automate {
         ///////////////////////////////////////////////////////////////////////////////
 
         KeyListener listener = new KeyListener() {
-            Node currentNode = initNode;
+            Node currentNode = root;
             int count = 0;
             Node lastNode = currentNode.clone();
 
@@ -115,13 +115,15 @@ public class Automate {
     public static void afficherArbre(Node root) {
         if (!root.getAdjaceNodes().isEmpty()) {
             root.getAdjaceNodes().forEach((node) -> {
-                System.out.println(node.getAutoComplete());
+                System.out.println(node.getValue());
                 afficherArbre(node);
             });
         }
     }
 
     public static void main(String[] args) {
-        prediction();
+        Entrepot.readFile();
+        Entrepot.creerArbre();
+        prediction(Entrepot.getRoot());
     }
 }

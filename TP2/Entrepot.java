@@ -7,10 +7,8 @@ import java.util.*;
 
 public class Entrepot  { //Classe principale qui gere tout le systeme
 
-    //public Entrepot(){ this.inventaire = inventaire;};
-
     private static Map<String,Objet> inventaire = new HashMap<String,Objet>();
-
+    private static Node root = new Node(null, ' ');
     public static void readFile() {
         try {
             String fileName = "inventaire.txt";
@@ -30,27 +28,53 @@ public class Entrepot  { //Classe principale qui gere tout le systeme
                 String type = scannerLignes.next();
 
                 inventaire.put(code, new Objet(name, code, type)); //remplissage de notre inventaire
-                System.out.println("Objet lu :"+inventaire.get(code).getName() +" "+ inventaire.get(code).getType()+" "+ inventaire.get(code).getCode());
+                //System.out.println("Objet lu :"+inventaire.get(code).getName() +" "+ inventaire.get(code).getType()+" "+ inventaire.get(code).getCode());
 
             }
         }
         catch (FileNotFoundException e) { e.printStackTrace();}
     } //Fonctionne parfaitement : lis le fichier et remplis l'inventaire avec les objets du fichier
 
-    public void creerArbre(){
+    public static void creerArbre(){
 
 
 
+    for(var entrySet: inventaire.entrySet()){
+        Node currentNode = root;
+        for(char val : entrySet.getValue().getName().toCharArray()){
+            if(currentNode.nextChild(val) == null){
+                currentNode.getAdjaceNodes().add(new Node(currentNode, val));
+                currentNode.getAutoComplete().add(entrySet.getValue().getName());
+            }
+            currentNode = currentNode.nextChild(val);
+        }
 
-
+        /*boolean test = false;
+        for(var node: root.getAdjaceNodes()) {
+            if (node.getValue() == entrySet.getValue().getName().charAt(0)) {
+                test = true;
+            }
+        }
+        if (!test) {
+            root.getAdjaceNodes().add(new Node(root, entrySet.getValue().getName().charAt(0)));
+        }*/
     }
-      
+
+        /*root.getAdjaceNodes().forEach((node) ->{
+            System.out.println(node.getValue());
+        });
+*/
+        Automate.afficherArbre(root);
+    }
+
+    public static Node getRoot() {
+        return root;
+    }
+
     public static void main(String args[]) {
         System.out.println("Debut Main");
-        //System.getproperty("java.classpath");
-        //Entrepot entrepot;
-       readFile();
-            
+        readFile();
+        creerArbre();
     }
 
 

@@ -6,8 +6,9 @@ public class Node{
     private LinkedList<String> autoComplete = new LinkedList<>();
     private char value = ' ';
 
-    public Node(Node parent){
+    public Node(Node parent, char value){
         this.parent = parent;
+        this.value = value;
     }
 
     public Node(Node parent, LinkedList<Node> adjaceNodes, LinkedList<String> autoComplete, char value){
