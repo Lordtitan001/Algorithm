@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.nio.file.Paths;
 import java.security.Key;
 import java.util.*;
@@ -65,6 +66,39 @@ public class Entrepot  { //Classe principale qui gere tout le systeme
         }
 
 
+    }
+
+    public static void rechercheParType(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("entrez un type d'objet");
+        String type2 = scanner.next();
+        Type type = null;
+        switch(type2) {
+            case "A": type = Type.A; break;
+            case "B": type = Type.B; break;
+            case "C": type = Type.C; break;
+        }
+        switch (type){
+            case A:
+                for(var i : inventaire.entrySet()) {
+                    if (i.getValue().getType() == Type.A)
+                        System.out.println(i.getValue().getName());
+                }
+                break;
+            case B:
+                for(var i : inventaire.entrySet()) {
+                    if (i.getValue().getType() == Type.B)
+                        System.out.println(i.getValue().getName());
+                }
+                break;
+            case C:
+                for(var i : inventaire.entrySet()) {
+                    if (i.getValue().getType() == Type.C)
+                        System.out.println(i.getValue().getName());
+                }
+                break;
+        }
+        scanner.close();
     }
 
     public static Node getRootNoms(){
