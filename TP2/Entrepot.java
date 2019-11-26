@@ -11,6 +11,7 @@ public class Entrepot  { //Classe principale qui gere tout le systeme
     private static Map<String,Objet> inventaire = new HashMap<String,Objet>();
     private static Node rootNoms = new Node(null, ' ');
     private static Node rootCodes = new Node(null, ' ');
+    private static Node rootTypes = new Node(null, ' ');
 
     public static void readFile(String fileName) {
         try {
@@ -101,11 +102,36 @@ public class Entrepot  { //Classe principale qui gere tout le systeme
         scanner.close();
     }
 
+    public static void creerAbresTypes(){
+        for(var entrySet: inventaire.entrySet()){
+            Node currentNode = rootTypes;
+            for(char val : entrySet.getValue().getType().toString().toCharArray()){
+                if(currentNode.nextChild(val) == null){
+                    currentNode.getAdjaceNodes().add(new Node(currentNode, val));
+                }
+                currentNode.getAutoComplete().add(entrySet.getValue().getType().toString());
+                currentNode = currentNode.nextChild(val);
+            }
+        }
+    }
+
+    public static  void initialisation(String fileName){
+
+        readFile(fileName);
+        creerArbreNoms();
+        creerArbreNoms();
+        creerAbresTypes();
+
+    }
+
     public static Node getRootNoms(){
         return rootNoms;
     }
     public static Node getRootCodes(){
         return rootCodes;
+    }
+    public static Node getRootTypes(){
+        return rootTypes;
     }
 
     public static void main(String args[]) {

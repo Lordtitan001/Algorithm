@@ -123,8 +123,9 @@ public class Automate {
 
     public static void main(String[] args) {
         Entrepot.readFile("inventaire.txt");
-        Entrepot.creerArbreCodes();
-        Entrepot.rechercheParType();
+        Entrepot.creerAbresTypes();
+        //Entrepot.creerArbreCodes();
+        //Entrepot.rechercheParType();
         //afficherArbre(Entrepot.getRootCodes());
         //prediction(Entrepot.getRootCodes());
     }
