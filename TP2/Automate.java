@@ -122,8 +122,9 @@ public class Automate {
     }
 
     public static void main(String[] args) {
-        Entrepot.readFile();
-        Entrepot.creerArbre();
-        prediction(Entrepot.getRoot());
+        Entrepot.readFile("inventaire.txt");
+        Entrepot.creerArbreCodes();
+        afficherArbre(Entrepot.getRootCodes());
+        //prediction(Entrepot.getRootCodes());
     }
 }
