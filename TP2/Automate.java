@@ -121,12 +121,13 @@ public class Automate {
         }
     }
 
-    public static void main(String[] args) {
-        Entrepot.readFile("inventaire.txt");
-        Entrepot.creerAbresTypes();
+    /*public static void main(String[] args) {
+        //Entrepot.readFile("inventaire.txt");
+        //Entrepot.creerAbresTypes();
         //Entrepot.creerArbreCodes();
         //Entrepot.rechercheParType();
-        //afficherArbre(Entrepot.getRootCodes());
+        //afficherArbre(Entrepot.getRootTypes());
         //prediction(Entrepot.getRootCodes());
-    }
+
+    }*/
 }

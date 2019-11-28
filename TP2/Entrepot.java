@@ -134,15 +134,121 @@ public class Entrepot  { //Classe principale qui gere tout le systeme
         return rootTypes;
     }
 
+    private static Map<String,Objet> panier = new HashMap<String,Objet>();
+
     public static void main(String args[]) {
         System.out.println("Debut Main");
-        //readFile("inventaire.txt");
-        //creerArbreCodes();
+        initialisation("inventaire.txt");
+        interfaceCommande();
+
     }
 
+    public static void ajouterAuPanier(String nomObjet){
 
+        for (var entrySet : inventaire.entrySet()){
 
+            if(entrySet.getValue().getName().equals(nomObjet)){
+                panier.put(entrySet.getValue().getCode(),entrySet.getValue());
+                inventaire.remove(entrySet.getValue().getCode(),entrySet.getValue());
+                break;
+            }
+        }
+    }
 
+    public static void afficherPanier(){
+        Objet objet;
+        System.out.println("le contenu du panier est le suivant :");
+        //panier.forEach((k,v)->System.out.println(v.getName()));
+        for (Objet auto : panier.values()){
+            System.out.println(auto.getName());
+        }
+    }
+    public static  void viderPanier(){
+        for (Map.Entry<String, Objet> auto : panier.entrySet()){
+            panier.remove(auto.getValue().getCode(),auto.getValue());
+            inventaire.put(auto.getValue().getCode(),auto.getValue());
+            if(auto == null)
+                break;
+        }
+    }
+    public static  void retirerDuPanier(String nomObjet){
+        for (Map.Entry<String, Objet> auto : panier.entrySet()){
+            if(auto.getValue().getName().equals(nomObjet)){
+                panier.remove(auto.getValue().getCode(),auto.getValue());
+                inventaire.put(auto.getValue().getCode(),auto.getValue());
+                break;
+            }
+        }
+    }
+    public static void commander(){
+        int poidsCommande = 0;
+        for (Map.Entry<String, Objet> auto : panier.entrySet()){
+            switch (auto.getValue().getType()){
+                case A:
+                    poidsCommande += 1;
+                    break;
+                case B:
+                    poidsCommande += 3;
+                    break;
+                case C:
+                    poidsCommande += 5;
+                    break;
+            }
+        }
+        if (poidsCommande > 25){
+            System.out.println("Commande impossible (Poids superieur a 25 kg), videz le panier ou bien retirez certains objets");
+        }
+        else{
+            System.out.println("Commande passee, les objets commandes ne sont plus disponible dans l'inventaire");
+            viderPanier();
+        }
+    }
+
+    public static void interfaceCommande(){
+
+        int numero = 0;
+        while(numero != 6) {
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.println("1: Ajouter un objet au panier" +"\n"
+                    +"2: Retirer un objet du panier" + "\n"
+                    +"3: Vider le panier" + "\n"
+                    +"4: Afficher le panier" + "\n"
+                    +"5: Passer la commande" + "\n"
+                    +"6: Quitter");
+
+            System.out.println("Interface commande, veuillez selectionnez une option en entrant un chiffre :");
+            numero = scanner.nextInt();
+            //scanner.close();
+            switch (numero) {
+                case 1:
+                    System.out.println("Entrez le nom d'un objet a ajouter");
+                    scanner = new Scanner(System.in);
+                    String nom = scanner.next();
+                    //scanner.close();
+                    ajouterAuPanier(nom);
+                    break;
+                case 2:
+                    System.out.println("Entrez le nom d'un objet a retirer");
+                    scanner = new Scanner(System.in);
+                    String nom2 = scanner.next();
+                    //scanner.close();
+                    retirerDuPanier(nom2);
+                    break;
+                case 3:
+                    viderPanier();
+                    break;
+                case 4:
+                    afficherPanier();
+                    break;
+                case 5:
+                    commander();
+                    break;
+                case 6: break;
+
+            }
+        }
+    }
 
 }  
 
