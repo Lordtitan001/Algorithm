@@ -15,8 +15,11 @@ public class Interface extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel content = new JPanel();
+    private JPanel blankField = new JPanel();
     private JPanel commanderC = new JPanel();
-    private CardLayout cardLayout = new CardLayout();
+    private JPanel affichage = new JPanel();
+    private JPanel fin = new JPanel();
+    private JPanel verticalBox = new JPanel();
     private Button retour = new Button("Retour");
 
     ////////////////////// Pour la recherche ////////////////////////
@@ -27,58 +30,55 @@ public class Interface extends JFrame {
     private JLabel label3 = new JLabel("Type");
     private String[] tab = { "A", "B", "C" };
     private JComboBox<String> combo = new JComboBox<>(tab);
-    //////////////////// Pour Ajouter la commande ////////////////////
-    // private Box verticalBox = new Box(BoxLayout.PAGE_AXIS);
-    // private JTextField jtfA = new JTextField("                  ");
-    // private JLabel labelA = new JLabel("Type A");
-    // private JPanel contentA = new JPanel();
-    // private JTextField jtfB = new JTextField("                  ");
-    // private JLabel labelB = new JLabel("Type B");
-    // private JPanel contentB = new JPanel();
-    // private JTextField jtfC = new JTextField("                  ");
-    // private JLabel labelC = new JLabel("Type C");
-    // private JPanel contentC = new JPanel();
-    // private Button buttonCommader = new Button("Ok");
-    
-     private Box vertical = new Box(BoxLayout.PAGE_AXIS);
+    private JTextField autoComplete = new JTextField("AutoComplete");
+   
+
+    private JPanel vertical = new JPanel();
     public Interface() {
         this.setTitle("Interface TP2");
-        this.setSize(700, 400);
+        this.setSize(500, 500);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
 
+        vertical.setLayout(new BoxLayout(vertical, BoxLayout.PAGE_AXIS));
+        commanderC.setLayout(new BoxLayout(commanderC, BoxLayout.LINE_AXIS));
         commanderC.add(this.label);
         commanderC.add(this.jtf);
-        commanderC.add(Box.createRigidArea(new Dimension(10, 0)));
         commanderC.add(this.label2);
         commanderC.add(this.jtf2);
-        commanderC.add(Box.createRigidArea(new Dimension(10, 0)));
         commanderC.add(this.label3);
         commanderC.add(combo);
-        commanderC.add(retour);
 
-        // contentA.add(labelA);
-        // contentA.add(jtfA);
-        // contentB.add(labelB);
-        // contentB.add(jtfB);
-        // contentC.add(labelC);
-        // contentC.add(jtfC);
-        // contentC.add(buttonCommader);
-        // verticalBox.add(contentB);
-        // verticalBox.add(contentA);
-        // verticalBox.add(contentC);
+        affichage.setLayout(new BoxLayout(affichage, BoxLayout.LINE_AXIS));
+        affichage.add(autoComplete);
+        affichage.setPreferredSize(new Dimension(200,  100));
+        blankField.setLayout(new BoxLayout(blankField, BoxLayout.LINE_AXIS));
+        blankField.setPreferredSize(new Dimension(200,  this.getHeight() - 150));
 
+        fin.setLayout(new BoxLayout(fin, BoxLayout.LINE_AXIS));
+        fin.add(retour);
+
+        verticalBox.setLayout(new BoxLayout(verticalBox, BoxLayout.PAGE_AXIS));
+        verticalBox.add(commanderC);
+        verticalBox.add(affichage, BorderLayout.NORTH);
+        verticalBox.add(blankField);
+        verticalBox.add(fin);
+        
         Menu menu = new Menu();
 
         menu.getSugession().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                cardLayout.show(content, "commander");
+                content.getComponents()[1].setVisible(true);
+                content.getComponents()[1].setSize(50, 50);
+                content.getComponents()[0].setVisible(false);
+                //cardLayout.show(content, "commander");
             }
         });  
 
         menu.getVider().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                cardLayout.show(content, "commander");
+                // content.getComponents()[0].setVisible(true);
+                // cardLayout.show(content, "menu");
             }
         });
 
@@ -96,20 +96,29 @@ public class Interface extends JFrame {
 
         retour.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                cardLayout.show(content, "menu");
+                content.getComponents()[0].setVisible(true);
+                content.getComponents()[1].setVisible(false);
+                //cardLayout.show(content, "menu");
             }
         }); 
+
+
+
+        BoxLayout cardLayout = new BoxLayout(content, BoxLayout.LINE_AXIS);
         content.setLayout(cardLayout);
         content.add("menu", menu);
-        content.add("commander", commanderC);
-
-        vertical.add(content, BorderLayout.WEST);
+        content.add("commander", verticalBox);
+        content.getComponents()[1].setVisible(false);
+        vertical.add(content);
         vertical.add(retour);
-		this.getContentPane().add(vertical, BorderLayout.WEST);
+		this.getContentPane().add(vertical);
 
         this.setVisible(true);
         }
 
+        public JTextField getAutoComplete() {
+            return autoComplete;
+        }
         public JTextField getJtf() {
             return jtf;
         }

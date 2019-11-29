@@ -42,8 +42,9 @@ public class Entrepot  { //Classe principale qui gere tout le systeme
             for(char val : entrySet.getValue().getName().toCharArray()){
                 if(currentNode.nextChild(val) == null){
                     currentNode.getAdjaceNodes().add(new Node(currentNode, val));
-                    currentNode.getAutoComplete().add(entrySet.getValue().getName());
-                }
+                   
+                } 
+                currentNode.getAutoComplete().add(entrySet.getValue().getName());
                 currentNode = currentNode.nextChild(val);
             }
         }
