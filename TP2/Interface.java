@@ -123,6 +123,10 @@ public class Interface extends JFrame {
             return jtf;
         }
 
+
+        public JTextField getJtf2() {
+            return jtf2;
+        }
         public static void main(String[] args) {
             Interface in = new Interface();
             //in.contentC.addNotify();;

@@ -4,18 +4,22 @@ public class Node{
     private Node parent;
     private LinkedList<Node> adjaceNodes = new LinkedList<>();
     private LinkedList<String> autoComplete = new LinkedList<>();
+    private LinkedList<Objet> listeObjets = new LinkedList<>();
     private char value = ' ';
+    private String type;
 
-    public Node(Node parent, char value){
+    public Node(Node parent, char value,String type){
         this.parent = parent;
         this.value = value;
+        this.type = type;
     }
 
-    public Node(Node parent, LinkedList<Node> adjaceNodes, LinkedList<String> autoComplete, char value){
+    public Node(Node parent, LinkedList<Node> adjaceNodes, LinkedList<String> autoComplete, char value,String type){
         this.adjaceNodes = adjaceNodes;
         this.parent = parent;
         this.autoComplete = autoComplete;
         this.value = value;
+        this.type = type;
     }
 
     public void afficherAutoComplete() {
@@ -29,6 +33,22 @@ public class Node{
             }
         }
         return null;
+    }
+
+    public LinkedList<Objet> getListeObjets() {
+        return listeObjets;
+    }
+
+    public void setListeObjets(LinkedList<Objet> listeObjets) {
+        this.listeObjets = listeObjets;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public char getValue() {
@@ -60,7 +80,7 @@ public class Node{
 
 
     public Node clone(){
-        return new Node(this.parent, this.adjaceNodes, this.autoComplete, this.value);
+        return new Node(this.parent, this.adjaceNodes, this.autoComplete, this.value, this.type);
     }
 
 

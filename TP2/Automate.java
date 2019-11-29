@@ -1,20 +1,28 @@
 import java.util.LinkedList;
-import java.awt.Container;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
-import javax.swing.JFrame;
-import javax.swing.JTextField;
-
 public class Automate {
 
-    public static void prediction(Node root) {
-        Interface in = new Interface();
+    private static Node current ;
+    private static Node rootNoms = Entrepot.getRootNoms();
+    private static Node rootCode = Entrepot.getRootCodes();
+    private static Node rootType = Entrepot.getRootTypes();
+    private static int count = 0;
+    public  void setCurrent(Node current) {
+        Automate.current = current;
+    }
+
+    public Node getCurrent() {
+        return current;
+    }
+    public static KeyListener prediction(Node root, Interface in) {
+
         KeyListener listener = new KeyListener() {
-            Node currentNode = root;
-            int count = 0;
-            Node lastNode = currentNode.clone();
+            
            
+            Node currentNode = root;
+            Node lastNode = currentNode.clone();
+            
             @Override
             public void keyPressed(KeyEvent event) {
                 if (event.getExtendedKeyCode() == KeyEvent.VK_BACK_SPACE) {
@@ -26,33 +34,34 @@ public class Automate {
                         }
                         if (currentNode != null) {
                             currentNode.afficherAutoComplete();
-                            in.getAutoComplete().
-                            setText(transformArrayIntoString(currentNode.getAutoComplete()));
+                            Automate.current = currentNode;
+                            // in.getAutoComplete().
+                            // setText(transformArrayIntoString(currentNode.getAutoComplete()));
                         }
                     } else if (currentNode != null) {
                         if (currentNode.getParent() != null) {
                             currentNode = currentNode.getParent();
                             lastNode = currentNode.clone();
+                            Automate.current = currentNode;
                             currentNode.afficherAutoComplete();
-                            in.getAutoComplete().
-                            setText(transformArrayIntoString(currentNode.getAutoComplete()));
+                            // in.getAutoComplete().
+                            // setText(transformArrayIntoString(currentNode.getAutoComplete()));
                         }
                     }
                 } else if (currentNode != null) {
                     currentNode = currentNode.nextChild(event.getKeyChar());
                     if (currentNode != null) {
                         lastNode = currentNode.clone();
-                        System.out.println(lastNode.getValue());
-                        currentNode.afficherAutoComplete();
-                        in.getAutoComplete().
-                            setText(transformArrayIntoString(currentNode.getAutoComplete()));
+                        Automate.current = currentNode;
+                         currentNode.afficherAutoComplete();
+                        // in.getAutoComplete().
+                        //     setText(transformArrayIntoString(currentNode.getAutoComplete()));
                     } else {
                         count++;
                     }
                 } else {
                     count++;
                 }
-                System.out.println(count);
             }
 
             @Override
@@ -63,19 +72,22 @@ public class Automate {
             public void keyTyped(KeyEvent event) {
 
             }
-        };
-
-       
-        JFrame frame = new JFrame("Key Listener");
-        Container contentPane = frame.getContentPane();
-        JTextField textField = new JTextField();
-        in.getJtf().addKeyListener(listener);
-        //textField.addKeyListener(listener);
         
-        contentPane.add(in);
-        frame.pack();
-        frame.setVisible(true);
+        };
+        return listener;
+    }
 
+    public static Interface setKeyListener(Interface in) {
+        KeyListener codeListener = prediction(rootCode, in);
+        KeyListener nameListener = prediction(rootNoms, in);
+        in.getJtf().addKeyListener(nameListener);
+        in.getJtf2().addKeyListener(codeListener); 
+        return in;  
+
+    }
+
+    public static void setAllRoots(){
+        //current
     }
 
     public static String transformArrayIntoString(LinkedList<String> array){
@@ -90,15 +102,27 @@ public class Automate {
     public static void afficherArbre(Node root) {
         if (!root.getAdjaceNodes().isEmpty()) {
             root.getAdjaceNodes().forEach((node) -> {
-                System.out.println(node.getValue());
+                System.out.println(node.getListeObjets().size());
+                // node.getListeObjets().forEach((objet)->{
+                //     System.out.println(node.getValue());
+                //     System.out.println(objet.getName() + " " + objet.getCode() + " " + objet.getType());
+                // });
                 afficherArbre(node);
             });
         }
     }
 
     public static void main(String[] args) {
-        Entrepot.readFile();
-        Entrepot.creerArbre();
-        prediction(Entrepot.getRoot());
+        Entrepot.readFile("inventaire.txt");
+        Entrepot.creerAbresTypes();
+        // Entrepot.creerArbreCodes();
+        // Entrepot.creerArbreNoms();
+
+        afficherArbre(Entrepot.getRootTypes());
+        // Interface in = new Interface();
+        // in = setKeyListener(in);
+        // in.setVisible(true);
+        //Entrepot.rechercheParType();
+        //afficherArbre(Entrepot.getRootTypes());
     }
 }
