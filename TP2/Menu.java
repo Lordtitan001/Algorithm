@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import java.util.concurrent.TimeUnit;
 import java.awt.event.ActionEvent;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -44,11 +45,10 @@ public class Menu extends JPanel {
         passerCommande.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 if (Entrepot.commander())
-                    label.setText("Commande passee, les objets commandes ne"
-                     +  " sont plus disponible dans l'inventaire");
-                else
                     label.setText(
-                            "Commande impossible (Poids superieur a 25 kg), videz le panier"
+                            "Commande passee, les objets commandes ne" + " sont plus disponible dans l'inventaire");
+                else
+                    label.setText("Commande impossible (Poids superieur a 25 kg), videz le panier"
                             + " ou bien retirez certains objets");
 
                 Interface.getModelPanier().clear();
@@ -66,6 +66,7 @@ public class Menu extends JPanel {
         quitter.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 label.setText("close on sunday");
+                System.exit(0);
             }
         });
 

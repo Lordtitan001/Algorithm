@@ -1,3 +1,4 @@
+
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -22,14 +23,14 @@ public class Interface extends JFrame {
     private JPanel verticalBox = new JPanel();
     private static JPanel panier = new JPanel();
     private Button retour = new Button("Retour");
-    private static JList<String> listObjet = new JList<>();
+    private static JList<Objet> listObjet = new JList<>();
 
-    private JList<String> listObjetPannier = new JList<>();
+    private JList<Objet> listObjetPannier = new JList<>();
 
     private JScrollPane scrollPane  = new JScrollPane(listObjet);
     private JScrollPane scrollPanePanier = new JScrollPane(listObjetPannier);
     
-    private static DefaultListModel<String> modelPanier = new DefaultListModel<String>();
+    private static DefaultListModel<Objet> modelPanier = new DefaultListModel<Objet>();
 
     private JTextField jtf = new JTextField();
     private JLabel label = new JLabel("Nom");
@@ -62,8 +63,8 @@ public class Interface extends JFrame {
         
         Menu menu = new Menu();
 
-        var model = new DefaultListModel<String>();
-
+        var model = new DefaultListModel<Objet>();
+        listObjet.setCellRenderer(new ObjetListCellRenderer());
         listObjet.setModel(model);
         scrollPane.setPreferredSize(new Dimension(50, 200));
         
@@ -82,7 +83,7 @@ public class Interface extends JFrame {
         verticalBox.add(blankField);
         verticalBox.add(fin);
         
-        
+        listObjetPannier.setCellRenderer(new ObjetListCellRenderer());
         listObjetPannier.setModel(modelPanier);
         scrollPanePanier.setPreferredSize(new Dimension(this.getHeight(), this.getHeight() - 50));
         panier.add(scrollPanePanier);
@@ -116,7 +117,8 @@ public class Interface extends JFrame {
                 content.getComponents()[1].setVisible(false);
                 content.getComponents()[2].setVisible(true);
                 for(var entrySet : Entrepot.getPanier().entrySet()){
-                    modelPanier.addElement(entrySet.getValue().getName() + " " + entrySet.getValue().getCode() + " " + entrySet.getValue().getType());
+                    //modelPanier.addElement(entrySet.getValue().getName() + " " + entrySet.getValue().getCode() + " " + entrySet.getValue().getType());        
+                    modelPanier.addElement(entrySet.getValue());
                 }
             }
         });
@@ -124,8 +126,8 @@ public class Interface extends JFrame {
         menu.getAjouterPanier().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 menu.getLabel().setText("ajout au panier");
-                System.out.println(listObjet.getSelectedValue().split(" ", 3)[1]);
-                Entrepot.ajouterAuPanier(listObjet.getSelectedValue().split(" ", 3)[1]);  
+                //System.out.println(listObjet.getSelectedValue().split(" ", 3)[1]);
+                Entrepot.ajouterAuPanier(listObjet.getSelectedValue().getCode());  
                 Automate.setFinalObjets();
                 Automate.afficherListeObjet(Automate.getFinalObjets());              
             }
@@ -147,11 +149,11 @@ public class Interface extends JFrame {
         this.setVisible(true);
         }
 
-        public static DefaultListModel<String> getModelPanier() {
+        public static DefaultListModel<Objet> getModelPanier() {
             return modelPanier;
         }
 
-        public JList<String> getListObjetPannier() {
+        public JList<Objet> getListObjetPannier() {
             return listObjetPannier;
         }
 
@@ -178,7 +180,7 @@ public class Interface extends JFrame {
             return combo;
         }
 
-        public JList<String> getListObjet() {
+        public JList<Objet> getListObjet() {
             return listObjet;
         }
 }

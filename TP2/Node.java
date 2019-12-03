@@ -1,10 +1,12 @@
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Node{
     private Node parent;
     private LinkedList<Node> adjaceNodes = new LinkedList<>();
     private LinkedList<String> autoComplete = new LinkedList<>();
-    private LinkedList<Objet> listeObjets = new LinkedList<>();
+    //Modification
+    private HashMap<String, Objet> listeObjets = new HashMap<String, Objet>();
     private char value = ' ';
     private String type;
 
@@ -35,11 +37,11 @@ public class Node{
         return null;
     }
 
-    public LinkedList<Objet> getListeObjets() {
+    public HashMap<String, Objet> getListeObjets() {
         return listeObjets;
     }
 
-    public void setListeObjets(LinkedList<Objet> listeObjets) {
+    public void setListeObjets(HashMap<String, Objet> listeObjets) {
         this.listeObjets = listeObjets;
     }
 

@@ -43,7 +43,7 @@ public class Entrepot {
                 if (currentNode.nextChild(val) == null) {
                     currentNode.getAdjaceNodes().add(new Node(currentNode, val, "nom"));
                 }
-                currentNode.getListeObjets().add(entrySet.getValue());
+                currentNode.getListeObjets().put(entrySet.getKey(), entrySet.getValue());
                 currentNode.getAutoComplete().add(entrySet.getValue().getName());
                 currentNode = currentNode.nextChild(val);
             }
@@ -57,7 +57,7 @@ public class Entrepot {
                 if (currentNode.nextChild(val) == null) {
                     currentNode.getAdjaceNodes().add(new Node(currentNode, val, "code"));
                 }
-                currentNode.getListeObjets().add(entrySet.getValue());
+                currentNode.getListeObjets().put(entrySet.getKey(), entrySet.getValue());
                 currentNode.getAutoComplete().add(entrySet.getValue().getCode());
                 currentNode = currentNode.nextChild(val);
             }
@@ -70,7 +70,7 @@ public class Entrepot {
 
     public static void creerAbresTypes() {
         for (var entrySet : inventaire.entrySet()) {
-            rootTypes.getListeObjets().add(entrySet.getValue());
+            rootTypes.getListeObjets().put(entrySet.getKey(), entrySet.getValue());
             Node currentNode = rootTypes;
             char val = entrySet.getValue().getType().toString().toCharArray()[0];
             if (currentNode.nextChild(val) == null) {
@@ -79,7 +79,7 @@ public class Entrepot {
             }
             currentNode.getAdjaceNodes().forEach((node) -> {
                 if (node.getValue() == val) {
-                    node.getListeObjets().add(entrySet.getValue());
+                    node.getListeObjets().put(entrySet.getKey(), entrySet.getValue());
                     node.getAutoComplete().add(entrySet.getValue().getType().toString());
                 }
             });

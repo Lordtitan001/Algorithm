@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.LinkedList;
 import javax.swing.DefaultListModel;
 import java.awt.event.ActionListener;
@@ -7,10 +8,10 @@ import java.awt.event.ActionEvent;
 
 public class Automate {
 
-    private static LinkedList<Objet> finalObjets = new LinkedList<>();
-    private static LinkedList<Objet> objetsNoms = Entrepot.getRootNoms().getListeObjets();
-    private static LinkedList<Objet> objetsCodes = Entrepot.getRootNoms().getListeObjets();
-    private static LinkedList<Objet> objetsTypes = Entrepot.getRootNoms().getListeObjets();
+    private static HashMap<String, Objet> finalObjets = new HashMap<>();
+    private static HashMap<String, Objet> objetsNoms = Entrepot.getRootNoms().getListeObjets();
+    private static HashMap<String, Objet> objetsCodes = Entrepot.getRootNoms().getListeObjets();
+    private static HashMap<String, Objet> objetsTypes = Entrepot.getRootNoms().getListeObjets();
     private static int count = 0;
     private static Interface in;
     private static String fileName = "";
@@ -78,27 +79,30 @@ public class Automate {
         afficherListeObjet(finalObjets);
     }
 
-    public static LinkedList<Objet> getFinalObjets() {
+    public static HashMap<String, Objet> getFinalObjets() {
         return finalObjets;
     }
 
-    public static void afficherListeObjet(LinkedList<Objet> objets) {
-        DefaultListModel<String> model = new DefaultListModel<>();
-        objets.forEach((objet) -> {
-            model.addElement(objet.getName() + " " +
-             objet.getCode() + " " + objet.getType());
-            System.out.println(objet.getName() + " " +
-             objet.getCode() + " " + objet.getType());
-        });
+    public static void afficherListeObjet(HashMap<String, Objet> objets) {
+        DefaultListModel<Objet> model = new DefaultListModel<>();
+        // objets.forEach((code, objet) -> {
+        //     model.addElement(objet.getName() + " " +
+        //      objet.getCode() + " " + objet.getType());
+        //     System.out.println(objet.getName() + " " +
+        //      objet.getCode() + " " + objet.getType());
+        // });
+        model.addAll(objets.values());
         in.getListObjet().setModel(model);
+        
     }
 
     public static void setFinalObjets() {
-        finalObjets = new LinkedList<>();
-        for (Objet objet : objetsNoms) {
-            if (objetsCodes.contains(objet) && objetsTypes.contains(objet)
-             && Entrepot.getInventaire().containsValue(objet)) {
-                finalObjets.add(objet);
+        finalObjets = new HashMap<String, Objet>();
+        for(var entry : objetsNoms.entrySet()){
+            if (objetsCodes.containsKey(entry.getKey()) 
+            && objetsTypes.containsKey(entry.getKey())
+             && Entrepot.getInventaire().containsKey(entry.getKey())) {
+                finalObjets.put(entry.getKey(), entry.getValue());
             }
         }
     }
@@ -125,10 +129,11 @@ public class Automate {
         return in;
     }
 
+    //modifier les autres  DefaultListModel<String> pour DefaultListModel<Objet> dans la classe Menu et Interface ou Entrepot
     public static void afficherArbre(Node root) {
         if (!root.getAdjaceNodes().isEmpty()) {
             root.getAdjaceNodes().forEach((node) -> {
-                node.getListeObjets().forEach((objet) -> {
+                node.getListeObjets().forEach((code, objet) -> {
                     System.out.println(node.getValue());
                     System.out.println(objet.getName() + " " 
                     + objet.getCode() + " " + objet.getType());

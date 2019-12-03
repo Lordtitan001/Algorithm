@@ -2,25 +2,9 @@
     "configurations": [
         {
             "type": "java",
-<<<<<<< HEAD
-            "name": "CodeLens (Launch) - Node",
+            "name": "CodeLens (Launch) - Automate",
             "request": "launch",
-            "mainClass": "Node"
-=======
-            "name": "CodeLens (Launch) - Interface",
-            "request": "launch",
-            "mainClass": "Interface",
-            "projectName": "TP2_7d90e683"
->>>>>>> refs/remotes/origin/master
-        },
-        {
-            "type": "java",
-            "name": "CodeLens (Launch) - Entrepot",
-            "request": "launch",
-<<<<<<< HEAD
-            "mainClass": "Entrepot"
-=======
-            "mainClass": "Entrepot",
+            "mainClass": "Automate",
             "projectName": "TP2_7d90e683"
         },
         {
@@ -28,8 +12,7 @@
             "name": "CodeLens (Launch) - Automate",
             "request": "launch",
             "mainClass": "Automate",
-            "projectName": "TP2_7d90e683"
->>>>>>> refs/remotes/origin/master
+            "projectName": "New folder_1b1d866a"
         }
     ]
 }
